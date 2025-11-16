@@ -268,7 +268,8 @@ a {
 /* ### TODO ### Media Queries */
 
 @media (max-width: 900px) {
-
+  
+  .col-1
   .col-2,
   .col-3,
   .col-4,
