@@ -80,6 +80,7 @@ input {
   display: block;
 
   height: 1.7rem;
+  padding: 0.2rem;
   margin-bottom: 0.7rem;
 }
 
@@ -88,6 +89,7 @@ input[type="submit"] {
 
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
+  font-weight: bold;
 }
 
 footer {
@@ -97,7 +99,6 @@ footer {
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
 }
-
 
 /* Grid styles (no changes required) */
 
@@ -173,7 +174,6 @@ footer {
   margin-bottom: 0.5rem;
 }
 
-
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
@@ -220,7 +220,6 @@ footer {
 
   max-height: 40vh;
 }
-
 
 .discovery__map img {
   display: flex;
