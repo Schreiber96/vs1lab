@@ -114,18 +114,14 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 100px; */
   height: 130px;
   padding-left: 40px;
   padding-right: 40px;
-  border: 1px solid lightgrey;
-  /* gap: 100px; */
-  /* flex-basis: 20%; */
+  border: 1px solid var(--border-color);
 }
 
 .header__image {
   width: 50px;
-
 }
 
 
@@ -140,18 +136,12 @@ a {
 /* ### TODO ### Styles for Tagging component */
 
 .tagging {
-  background-color: white;
   display: block;
 }
 
 #tag-form {
-  /* text-align: center; */
   padding-right: 20px;
 }
-
-/* #tag-latitude #tag-longitudie #tag-name #tag-hastag {
-  width: 90%;
-} */
 
 #tag-fieldset {
   margin-top: 10px;
@@ -167,32 +157,27 @@ a {
   font-weight: bold;
 }
 
-#tag-fieldset #tag-longitude {
-  background-color: #eeeeee;
-  border: 1px solid lightgrey;
+#tag-fieldset #tag-latitude,#tag-longitude {
+  background-color: var(--background-color);
+  border: 1px solid var(--gray-color);
 }
 
-#tag-fieldset #tag-latitude {
-  background-color: #eeeeee;
-  border: 1px solid lightgrey;
+#tag-fieldset input {
+  padding: 5px;
 }
 
 #tag-fieldset #tag-submit {
   font-weight: bold;
-  padding: 5px;
 }
 
 #tag-fieldset input:not(#tag-submit) {
-  padding: 5px;
   margin-bottom: 15px;
 }
-
 
 
 /* ### TODO ### Styles for Discovery component */
 
 .discovery {
-  background-color: white;
   display: block;
   padding-left: 20px;
 }
@@ -221,7 +206,7 @@ a {
 }
 
 #discovery-fieldset input:last-of-type {
-  color: grey;
+  color: var(--gray-color);
 }
 
 #discovery-fieldset label:not(legend) {
@@ -235,13 +220,13 @@ a {
 #discoveryResults {
   text-align: center;
   font-weight: bold;
-  color: rgb(58, 209, 255);
-  margin-right: 50px;
+  color: var(--link-color);
+  margin-right: 40px;
 }
 
 #discoveryResults li {
-  background-color: #eeeeee;
-  border: 1px solid grey;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   padding: 10px;
   list-style: none;
   margin-bottom: 20px;
@@ -255,32 +240,22 @@ a {
 
 /* ### TODO ### Styles for Footer Component */
 
-.footer {
-  background-color: #eeeeee;
-  height: auto;
-  width: 100%;
+footer {
+  background-color: var(--background-color);
   position: relative;
-  bottom: 0;
   padding: 30px;
-  border: 1px solid lightgrey;
+  margin-top: auto;
+  border: 1px solid var(--border-color);
 }
 
 /* ### TODO ### Media Queries */
 
 @media (max-width: 900px) {
   
-  .col-1
-  .col-2,
   .col-3,
-  .col-4,
   .col-5,
-  .col-6,
   .col-7,
-  .col-8,
-  .col-9,
-  .col-10,
-  .col-11,
-  .col-12 {
+  .col-9 {
     flex: 0 0 100%;
     width: 100%;
   }
@@ -296,12 +271,18 @@ a {
   }
 
   .discovery {
-    padding: 20px;
     padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  #tag-form {
+    padding-right: 0px;
+    margin-bottom: 40px;
   }
 
   #discoveryResults {
     padding: 0px;
     width: 100%;
+    margin-bottom: 40px;
   }
 }
