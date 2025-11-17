@@ -110,7 +110,7 @@ a {
 /* ### TODO ### Styles for Header Component */
 
 .header {
-  background-color: #eeeeee;
+  background-color: var(--background-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -131,17 +131,10 @@ a {
   background-color: white;
   display: flex;
   padding: 50px;
+  gap: 40px;
 }
 
 /* ### TODO ### Styles for Tagging component */
-
-.tagging {
-  display: block;
-}
-
-#tag-form {
-  padding-right: 20px;
-}
 
 #tag-fieldset {
   margin-top: 10px;
@@ -164,6 +157,7 @@ a {
 
 #tag-fieldset input {
   padding: 5px;
+  width: 100%;
 }
 
 #tag-fieldset #tag-submit {
@@ -176,11 +170,6 @@ a {
 
 
 /* ### TODO ### Styles for Discovery component */
-
-.discovery {
-  display: block;
-  padding-left: 20px;
-}
 
 .discovery__wrapper {
   display: flex;
@@ -236,6 +225,11 @@ a {
   display: grid;
 }
 
+img {
+    max-width:100%;
+    width: 100%;
+    height: auto;
+  }
 
 
 /* ### TODO ### Styles for Footer Component */
@@ -250,7 +244,7 @@ footer {
 
 /* ### TODO ### Media Queries */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
   
   .col-3,
   .col-5,
@@ -277,7 +271,6 @@ footer {
 
   #tag-form {
     padding-right: 0px;
-    margin-bottom: 40px;
   }
 
   #discoveryResults {
@@ -285,4 +278,9 @@ footer {
     width: 100%;
     margin-bottom: 40px;
   }
+
+  #map {
+    width: 100%;
+  }
+  
 }
