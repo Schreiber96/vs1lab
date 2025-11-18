@@ -134,12 +134,58 @@ button:hover {
   flex-direction: column;
   gap: 0.5rem;
   background-color: white;
+<<<<<<< Updated upstream
   padding: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   margin-bottom: 1rem;
 }
+=======
+  display: block;
+}
 
+#tag-form {
+  /* text-align: center; */
+  padding-right: 25px;
+}
+
+/* #tag-latitude #tag-longitudie #tag-name #tag-hastag {
+  width: 90%;
+} */
+
+#tag-fieldset {
+  margin-top: 10px;
+  padding: 8%;
+  display: grid;
+}
+
+#tag-fieldset label:not(legend) {
+  padding-bottom: 10px;
+}
+
+
+
+#tag-fieldset #tag-longitude {
+  background-color: #b69c9c;
+  border: 2px solid lightgrey;
+}
+
+#tag-fieldset #tag-latitude {
+  background-color: #b69c9c;
+  border: 2px solid lightgrey;
+}
+
+#tag-fieldset #tag-submit {
+  font-weight: bold;
+  padding: 10px;
+}
+
+#tag-fieldset input:not(#tag-submit) {
+  padding: 10px;
+  margin-bottom: 15px;
+>>>>>>> Stashed changes
+
+}
 
 /* ### Styles for Discovery component */
 
