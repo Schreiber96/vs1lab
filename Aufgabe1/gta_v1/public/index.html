@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header class="header row">
+    <header class="header">
         <img src="./images/location.png" class="header__image" alt="an image of a map and location">
         <h1 class="header__title">GeoTagApp</h1>
         <nav class="header__navigation">
@@ -21,32 +21,25 @@
         </nav>
     </header>
 
-    <main class="main row">
+    <main class="main">
         <section class="main__tagging tagging col-3">
             <h2>Tagging</h2>
 
             <!-- ############### VS1Lab 1a Form 1 Start -->
             <form id="tag-form" action="/tagging" method="post">
-
-                <!-- ... your code here ... -->
-
-                <fieldset>
-                    <legend><strong>Add a new GeoTag</strong></legend>
-
-                    <label for="latitude">Latitude:</label>
-                    <input type="number" id="latitude" name="latitude" disabled value="12345">
-
-                    <label for="longitude">Longitude:</label>
-                    <input type="number" id="longitude" name="longitude" disabled value="67890">
-
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="e.g. Central Berlin" maxlength="10" required>
-
-                    <label for="hashtag">Hashtag:</label>
-                    <input type="text" id="hashtag" name="hashtag" placeholder="e.g. #ber" pattern="#.{1,9}">
-
-                    <input type="submit" value="Add Tag" id="addTag" name="addTag" >
+                <fieldset id="tag-fieldset">
+                    <legend>Add a new GeoTag</legend>
+                    <label for="tag-latitude">Latitude:</label>
+                    <input class=input name="latitude" id="tag-latitude" placeholder="49.01379" type="text" />
+                    <label for="tag-longitude">Longitude:</label>
+                    <input class=input name="longitude" id="tag-longitude" placeholder="8.390071" type="text" />
+                    <label for="tag-name">Name:</label>
+                    <input class=input name="name" id="tag-name" placeholder="e.g. Central Berlin" type="text" maxlength=10 required/>
+                    <label for="tag-hashtag">Hashtag:</label>
+                    <input class=input name="hashtag" id="tag-hashtag" placeholder="e.g. #ber" type="text" maxlength=10 pattern="#[a-zA-Z]+$"/>
+                    <input class=input id="tag-submit" type="submit" value="Add Tag">
                 </fieldset>
+                <!-- ... your code here ... -->
 
             </form>
             <!-- ############### VS1Lab 1a Form 1 End -->
@@ -57,24 +50,25 @@
             <h2 class="discovery__title">Discovery</h2>
 
             <!-- ############### VS1Lab 1a Form 2 Start -->
-            <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
+            <form class="discovery__search " id="discoveryFilterForm" action="/discovery" method="post">
 
-                <!-- ... your code here ... -->
-                 
-                <fieldset>
-                    <legend><strong>Search</strong></legend>
-
-                    <label for="search">Search term or keywords:</label>
-                    <input type="text" id="search" name="search" placeholder="e.g. Berlin">
-                    
-                    <input type="submit" value="Search" id="searchButton" name="searchButton" disabled>
+                <fieldset id="discovery-fieldset">
+                    <legend>Search</legend>
+                    <label hidden for="discovery-latitude">Latitude:</label>
+                    <input class=input name="latitude" id="discovery-latitude" placeholder="49.01379" type="hidden" />
+                    <label hidden for="discovery-longitude">Longitude:</label>
+                    <input class=input name="longitude" id="discovery-longitude" placeholder="8.390071" type="hidden" />
+                    <label for="discovery-search">Search term or keywords:</label>
+                    <input class=input name="search" id="discovery-search" placeholder="e.g. Berlin" type="text" />
+                    <input class=input id="discovery-submit" type="submit" value="Search" />
                 </fieldset>
+                <!-- ... your code here ... -->
 
 
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
 
-            <div class="discovery__wrapper row">
+            <div class="discovery__wrapper">
                 <div class="discovery__taglist col-5">
                     <ul class="discovery__results" id="discoveryResults">
                         <li>Castle (49.01379, 8.404435) #sight</li>
