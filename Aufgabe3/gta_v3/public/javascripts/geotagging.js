@@ -42,7 +42,7 @@ function updateLocation() {
     console.log("latitude: " + latitude);
     console.log("longitude: " + longitude);
 
-    if (latitude == 404 || longitude == 404) {
+    if (latitude == 0 || longitude == 0) {
         LocationHelper.findLocation(callback);
     }
 }
