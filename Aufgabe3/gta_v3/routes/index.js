@@ -90,7 +90,7 @@ router.post('/tagging', (req, res) => {
   myStore.addGeoTag(myTag);
 
   // render ejs-template
-  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long) })
+  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long), latitude: lat, longitude: long })
 
 })
 

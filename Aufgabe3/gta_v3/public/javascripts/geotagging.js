@@ -9,6 +9,8 @@
 // Try to find this output in the browser...
 console.log("The geoTagging script is going to start...");
 
+
+    const mapManager = new MapManager();
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
@@ -19,32 +21,36 @@ function updateLocation() {
     const callback = function (locationHelper) {
         const latitude = locationHelper.latitude;
         const longitude = locationHelper.longitude;
+        console.log("lat: " + latitude + "\nlong: " + longitude);
 
         document.getElementById("tag-latitude").value = latitude;
         document.getElementById("tag-longitude").value = longitude;
         document.getElementById("discovery-latitude").value = latitude;
         document.getElementById("discovery-longitude").value = longitude;
-
-        let mapManager = new MapManager();
-
+    
         mapManager.initMap(latitude, longitude);
         mapManager.updateMarkers(latitude, longitude);
-
-        const element = document.getElementById("mapView");
-        element.remove();
-
-        const element2 = document.getElementsByTagName("span");
-        element2[0].remove();
     };
 
     let latitude = document.getElementById("discovery-latitude").value;
     let longitude = document.getElementById("discovery-longitude").value;
-    console.log("latitude: " + latitude);
-    console.log("longitude: " + longitude);
+
+    console.log("latitude: " + latitude + "\nlongitude: " + longitude);
 
     if (latitude == 0 || longitude == 0) {
         LocationHelper.findLocation(callback);
+    } else {
+        mapManager.initMap(latitude, longitude);
+        mapManager.updateMarkers(latitude, longitude);
     }
+
+
+    const element = document.getElementById("mapView");
+    element.remove();
+
+    const element2 = document.getElementsByTagName("span");
+    element2[0].remove();
+
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
