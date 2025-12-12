@@ -131,7 +131,7 @@ function updateLocation(locationHelper) {
     mapManager.initMap(latitude, longitude);
     mapManager.updateMarkers(latitude, longitude);
 
-    const element = document.getElementById("mapView");
+    const el2ement = document.getElementById("mapView");
     element.remove();
 
     const element2 = document.getElementsByTagName("span");
