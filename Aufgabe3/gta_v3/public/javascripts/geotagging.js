@@ -37,7 +37,14 @@ function updateLocation() {
         element2[0].remove();
     };
 
-    LocationHelper.findLocation(callback);
+    let latitude = document.getElementById("discovery-latitude").value;
+    let longitude = document.getElementById("discovery-longitude").value;
+    console.log("latitude: " + latitude);
+    console.log("longitude: " + longitude);
+
+    if (latitude == 404 || longitude == 404) {
+        LocationHelper.findLocation(callback);
+    }
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
