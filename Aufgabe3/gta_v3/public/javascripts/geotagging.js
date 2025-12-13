@@ -29,7 +29,14 @@ function updateLocation() {
         document.getElementById("discovery-longitude").value = longitude;
     
         mapManager.initMap(latitude, longitude);
-        mapManager.updateMarkers(latitude, longitude);
+
+        const map = document.getElementById("map");
+        let tags = [];
+        if (map?.dataset?.tags) {
+            tags = JSON.parse(map.dataset.tags);
+        }
+        console.log(tags);
+        mapManager.updateMarkers(latitude, longitude, tags);
     };
 
     let latitude = document.getElementById("discovery-latitude").value;
@@ -41,7 +48,14 @@ function updateLocation() {
         LocationHelper.findLocation(callback);
     } else {
         mapManager.initMap(latitude, longitude);
-        mapManager.updateMarkers(latitude, longitude);
+
+        const map = document.getElementById("map");
+        let tags = [];
+        console.log(map.dataset.tags);
+        if (map?.dataset?.tags) {
+            tags = JSON.parse(map.dataset.tags);
+        }
+        mapManager.updateMarkers(latitude, longitude, tags);
     }
 
 
