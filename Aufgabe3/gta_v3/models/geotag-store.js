@@ -32,7 +32,6 @@ class InMemoryGeoTagStore {
     #proximity = 0.01; // auf drängenden Wunsch von Chris
 
     addGeoTag(GeoTag) {
-        // this.#geotags[0] = GeoTag;
         this.#geotags.push(GeoTag);
     }
 
@@ -44,11 +43,6 @@ class InMemoryGeoTagStore {
             }
         }
         return false;
-    }
-
-    printArray() {
-        // const arr = this.#geotags;
-        console.log(this.#geotags);
     }
 
     getNearbyGeoTags(latitude, longitude) {

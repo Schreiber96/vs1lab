@@ -54,7 +54,7 @@ for (const [name, latitude, longitude, hashtag] of examplesArray) {
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  res.render('index', { taglist: [], longitude: 0, latitude: 0})
 });
 
 
@@ -90,7 +90,7 @@ router.post('/tagging', (req, res) => {
   myStore.addGeoTag(myTag);
 
   // render ejs-template
-  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long) })
+  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long), latitude: lat, longitude: long })
 
 })
 
@@ -112,9 +112,10 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-
-  const search = req.body.search;
-  res.render('index', { taglist: myStore.searchNearbyGeoTags(search) })
+const latitude = req.body.latitude;
+const longitude = req.body.longitude;
+const search = req.body.search;
+res.render('index', { taglist: myStore.searchNearbyGeoTags(search), latitude: latitude, longitude: longitude })
 
 })
 
