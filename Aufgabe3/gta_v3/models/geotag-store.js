@@ -29,7 +29,7 @@ class InMemoryGeoTagStore {
     // TODO: ... your code here ...
 
     #geotags = [];
-    #proximity = 0.01; // auf drängenden Wunsch von Chris
+    #proximity = 0.5;
 
     addGeoTag(GeoTag) {
         this.#geotags.push(GeoTag);
@@ -47,24 +47,31 @@ class InMemoryGeoTagStore {
 
     getNearbyGeoTags(latitude, longitude) {
         let outputArray = [];
+
         for (let i = 0; i < this.#geotags.length; i++) {
-            if (Math.abs(this.#geotags[i].latitude - latitude) < this.#proximity) {
-                if (Math.abs(this.#geotags[i].longitude - longitude) < this.#proximity) {
-                    outputArray.push(this.#geotags[i]);
-                }
+            if(this.compareLocations(this.#geotags[i], latitude, longitude)) {
+                outputArray.push(this.#geotags[i]);
             }
         }
         return outputArray;
     }
 
-    searchNearbyGeoTags(searchString) {
-        for (let i = 0; i < this.#geotags.length; i++) {
-            let currentName = this.#geotags[i].name;
-            let currentTag = this.#geotags[i].hashtag;
-            if(currentName.toLowerCase().includes(searchString.toLowerCase()) || currentTag.toLowerCase().includes(searchString.toLowerCase())) {
-                return this.getNearbyGeoTags(this.#geotags[i].latitude, this.#geotags[i].longitude);
+    searchNearbyGeoTags(latitude, longitude, searchString) {
+        let outputArray = this.getNearbyGeoTags(latitude, longitude);
+        for (let i = outputArray.length -1; i >= 0; i--) {
+            let currentName = outputArray[i].name;
+            let currentTag = outputArray[i].hashtag;
+            if(!(currentName.toLowerCase().includes(searchString.toLowerCase()) || currentTag.toLowerCase().includes(searchString.toLowerCase()))) {
+                outputArray.splice(i,1);
             }
         }
+        return outputArray;
+    }
+
+    compareLocations(geotag, latitude, longitude) {
+        let latdiv = Math.abs(latitude - geotag.latitude);
+        let longdiv = Math.abs(longitude - geotag.longitude);
+        return Math.sqrt(latdiv * latdiv + longdiv * longdiv) <= this.#proximity;
     }
 }
 

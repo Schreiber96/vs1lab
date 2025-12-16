@@ -21,7 +21,6 @@ function updateLocation() {
     const callback = function (locationHelper) {
         const latitude = locationHelper.latitude;
         const longitude = locationHelper.longitude;
-        console.log("lat: " + latitude + "\nlong: " + longitude);
 
         document.getElementById("tag-latitude").value = latitude;
         document.getElementById("tag-longitude").value = longitude;
@@ -35,14 +34,11 @@ function updateLocation() {
         if (map?.dataset?.tags) {
             tags = JSON.parse(map.dataset.tags);
         }
-        console.log(tags);
         mapManager.updateMarkers(latitude, longitude, tags);
     };
 
     let latitude = document.getElementById("discovery-latitude").value;
     let longitude = document.getElementById("discovery-longitude").value;
-
-    console.log("latitude: " + latitude + "\nlongitude: " + longitude);
 
     if (latitude == 0 || longitude == 0) {
         LocationHelper.findLocation(callback);
