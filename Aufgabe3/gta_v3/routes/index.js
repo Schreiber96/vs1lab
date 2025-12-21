@@ -91,6 +91,7 @@ router.post('/tagging', (req, res) => {
 
   // render ejs-template
   res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long), latitude: lat, longitude: long });
+
 })
 
 /**
@@ -114,7 +115,8 @@ router.post('/discovery', (req, res) => {
 const latitude = req.body.latitude;
 const longitude = req.body.longitude;
 const search = req.body.search;
-res.render('index', { taglist: myStore.searchNearbyGeoTags(search), latitude: latitude, longitude: longitude });
+res.render('index', { taglist: myStore.searchNearbyGeoTags(latitude, longitude, search), latitude: latitude, longitude: longitude });
+
 })
 
 module.exports = router;
