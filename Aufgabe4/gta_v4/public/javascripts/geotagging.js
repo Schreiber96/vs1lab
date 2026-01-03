@@ -9,6 +9,10 @@
 // Try to find this output in the browser...
 console.log("The geoTagging script is going to start...");
 
+let currentPage = 1;
+const pageSize = 10;
+let totalPages = 1;
+let totalItems = 0;
 
     const mapManager = new MapManager();
 /**
@@ -58,25 +62,28 @@ function updateLocation() {
     const element = document.getElementById("mapView");
     element.remove();
 
-    const element2 = document.getElementsByTagName("span");
-    element2[0].remove();
+    document.querySelector("#map span")?.remove();
 
 }
 
-async function updateDiscovery(data) {
+async function updateDiscovery(_, page = 1) {
     // get nearby GeoTags of newly added GeoTag
-    let dataArray;
-    if (!Array.isArray(data)) {
         const params = new URLSearchParams({
+            searchterm: document.getElementById("discovery-search").value,
             latitude: document.getElementById("tag-latitude").value,
-            longitude: document.getElementById("tag-longitude").value
+            longitude: document.getElementById("tag-longitude").value,
+            page: page,
+            size: pageSize
         });
 
-        const response = await fetch(`/api/geotags?${params}`);
-        dataArray = await response.json();
-    } else {
-        dataArray = data;
-    }
+    const response = await fetch(`/api/geotags?${params}`);
+    const result = await response.json();
+    
+    currentPage = result.page;
+    totalPages = result.totalPages;
+    totalItems = result.totalItems;
+
+    const dataArray = result.data;
 
     // delete all list items
     document.getElementById("discoveryResults").innerHTML = "";
@@ -96,6 +103,25 @@ async function updateDiscovery(data) {
     const latitude = document.getElementById("discovery-latitude").value;
     const longitude = document.getElementById("discovery-longitude").value;
     mapManager.updateMarkers(latitude, longitude, dataArray);
+
+    renderPagination();
+}
+
+function renderPagination() {
+    const pagination = document.querySelector(".pagination");
+
+    if (totalPages <= 1) {
+        pagination.style.display = "none";
+        return;
+    }
+
+    pagination.style.display = "flex";
+
+    const info = document.getElementById("page-info");
+    info.textContent = `${currentPage} / ${totalPages} (${totalItems})`;
+
+    document.getElementById("prev").disabled = currentPage === 1;
+    document.getElementById("next").disabled = currentPage === totalPages;
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
@@ -119,26 +145,31 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(newTag)
         })
             .then(response => response.json())
-            .then(data => updateDiscovery(data))
+            .then(() => {
+                currentPage = 1;
+                updateDiscovery(null, 1);
+            })
             .catch(error => console.error("Fehler:", error));
     })
 
     // Discovery Event-Listener
-    document.getElementById("discoveryFilterForm").addEventListener("submit", (event) => {
+   document.getElementById("discoveryFilterForm").addEventListener("submit", (event) => {
         event.preventDefault();
+        currentPage = 1;
+        updateDiscovery(null, 1);
+    });
 
-        const params = new URLSearchParams({
-            searchterm: document.getElementById("discovery-search").value,
-            latitude: document.getElementById("discovery-latitude").value,
-            longitude: document.getElementById("discovery-longitude").value
-        });
+    document.getElementById("prev").addEventListener("click", () => {
+        if (currentPage > 1) {
+            updateDiscovery(null, currentPage - 1);
+        }
+    });
 
-        fetch(`/api/geotags?${params}`)
-        .then(response => response.json())
-        .then(data => updateDiscovery(data))
-        .catch(error => console.error("Fehler:", error));
-    })
-
+    document.getElementById("next").addEventListener("click", () => {
+        if(currentPage < totalPages) {
+            updateDiscovery(null, currentPage + 1);
+        }
+    });
 
 });
 
