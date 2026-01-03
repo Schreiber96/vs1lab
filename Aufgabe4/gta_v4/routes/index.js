@@ -71,6 +71,11 @@ router.get('/api/geotags', function (req, res) {
   const searchterm = req.query.searchterm;
   const latitude = req.query.latitude;
   const longitude = req.query.longitude;
+
+  const page = parseInt(req.query.page) || 1;
+  const size = parseInt(req.query.size) || 10;
+  const offset = (page - 1) * size;
+
   let geoTags = [];
 
 
@@ -83,8 +88,17 @@ router.get('/api/geotags', function (req, res) {
   } else {
     geoTags = myStore.getAllGeoTags();
   }
+  const totalItems = geoTags.length;
+  const totalPages = Math.ceil(totalItems / size);
+  const pagedGeoTags = geoTags.slice(offset, offset + size);
 
-  res.json(geoTags);
+  res.json({
+    page: page,
+    size: size,
+    totalItems: totalItems,
+    totalPages: totalPages,
+    data: pagedGeoTags
+  });
 })
 
 /**
